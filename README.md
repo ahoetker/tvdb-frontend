@@ -1,4 +1,9 @@
-# tvdb-vue
+# tvdb-frontend
+
+![Docker](https://github.com/ahoetker/tvdb-frontend/workflows/Docker/badge.svg)
+
+Basic frontend to demonstrate the functionality of [tvdb-serverless-functions](https://github.com/ahoetker/tvdb-serverless-functions/). 
+
 
 ## Project setup
 ```
