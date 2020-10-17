@@ -78,9 +78,6 @@ export default {
                     this.results = results.results
                 }
             })
-        },
-        hover: function(item, v) {
-            item.hovered = v;
         }
     }
 }
