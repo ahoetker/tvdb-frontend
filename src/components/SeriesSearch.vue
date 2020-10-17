@@ -71,7 +71,13 @@ export default {
                 body: JSON.stringify({token: {token: this.token}, query: {name: this.query}})
             })
             .then(response => response.json())
-            .then(results => this.results = results.results)
+            .then(results => {
+                if (Object.entries(results.results).length === 0) {
+                    this.results = `No results found for: "${this.query}"`
+                } else {
+                    this.results = results.results
+                }
+            })
         },
         hover: function(item, v) {
             item.hovered = v;
