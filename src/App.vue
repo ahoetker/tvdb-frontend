@@ -1,17 +1,53 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-container>
+      <h1>Search for a TV Series</h1>
+
+        <template v-if="loading">
+          <b-spinner type="grow" label="Loading token"></b-spinner>
+          <p>
+            Loading TVDB auth token...
+          </p>
+        </template>
+
+        <template v-else>
+            <SeriesSearch v-bind:token="token"/>
+        </template>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import SeriesSearch from './components/SeriesSearch.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    SeriesSearch
+  },
+  data: function() {
+        return {
+            loading: false,
+            token: null
+        }
+    },
+  created: function() {
+      this.fetchToken()
+  },
+  methods: {
+      fetchToken() {
+          this.loading = true;
+          fetch('/function/tvdb-auth-token', {
+              method: 'POST',
+              body: JSON.stringify({})
+          })
+          .then(response => response.json())
+          .then(result => {
+              this.loading = false;
+              this.token = result.token;
+          })
+      }
   }
 }
 </script>
